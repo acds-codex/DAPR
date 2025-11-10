@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novedades – Car Cruz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Car Cruz</h1>
+        <p>Noticias, novedades y pasión por el motor</p>
+    </header>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="Main.html">Inicio</a>
+            <a href="noticias-f1.html">Noticias F1</a>
+            <a href="actualidad-del-motor.html">Actualidad del Motor</a>
+            <a href="novedades.html">Novedades</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Todas las Novedades</h2>
+            <p>Descubre todos nuestros artículos: desde las últimas noticias de Fórmula 1 hasta la actualidad del motor.</p>
+        </section>
+
+        <section class="posts-grid">
+            <article class="card">
+                <img src="https://cdn.atodomotor.com/contents/article/13780/foto1.jpg" alt="F1 São Paulo 2025">
+                <h3>São Paulo 2025: Análisis del Gran Premio de F1</h3>
+                <p>Cobertura completa de la carrera de Fórmula 1 en São Paulo. Análisis técnico de las estrategias de los equipos, desempeño de los pilotos y clasificaciones finales.</p>
+                <a href="entrada1.html" class="btn">Leer más</a>
+            </article>
+
+            <article class="card">
+                <img src="https://hips.hearstapps.com/hmg-prod/images/2022-lamborghini-huracan-tecnica-101-1657303967.jpg" alt="Lamborghini Huracán">
+                <h3>Despedida del Lamborghini Huracán</h3>
+                <p>El legendario Lamborghini Huracán se despide tras una década como uno de los superdeportivos más admirados del mundo. Su motor V10 atmosférico marcó a toda una generación.</p>
+                <a href="entrada2.html" class="btn">Leer más</a>
+            </article>
+
+            <article class="card">
+                <img src="https://cdn.group.renault.com/dac/master/dacia-vn/vehicules/sandero/sandero-bji/sandero-bji-ph1/hero-zones/dacia-sandero-bji-ph1-hero-zone-001.jpg.ximg.mediumx2.webp/a529cf1b49.webp" alt="Dacia Sandero">
+                <h3>Los 9 Coches Más Asequibles de 2025</h3>
+                <p>Análisis completo de los coches más económicos del mercado actual. Descubre cuáles son las mejores opciones en relación calidad-precio.</p>
+                <a href="entrada3.html" class="btn">Leer más</a>
+            </article>
+        </section>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <button id="open-newsletter" class="btn newsletter-btn" aria-haspopup="dialog">Quiero estar al tanto de las últimas novedades</button>
+        </div>
+    </section>
+
+    <div id="newsletter-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="newsletter-title">
+        <div class="modal-overlay" data-action="close"></div>
+        <div class="modal-panel" role="document">
+            <button class="modal-close" aria-label="Cerrar" data-action="close">×</button>
+            <h2 id="newsletter-title">Suscríbete al newsletter</h2>
+            <p>Introduce tu correo electrónico para recibir las últimas noticias y novedades.</p>
+            <form id="newsletter-form">
+                <label for="newsletter-email" class="visually-hidden">Correo electrónico</label>
+                <input id="newsletter-email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required aria-required="true">
+                <div class="form-actions">
+                    <button type="submit" class="btn">Suscribirme</button>
+                    <button type="button" class="btn alt" data-action="close">Cancelar</button>
+                </div>
+                <p id="newsletter-feedback" class="feedback" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>© 2025 Car Cruz</footer>
+
+    <script>
+        (function(){
+            const openBtn = document.getElementById('open-newsletter');
+            const modal = document.getElementById('newsletter-modal');
+            const overlay = modal.querySelector('.modal-overlay');
+            const closeEls = modal.querySelectorAll('[data-action="close"]');
+            const form = document.getElementById('newsletter-form');
+            const emailInput = document.getElementById('newsletter-email');
+            const feedback = document.getElementById('newsletter-feedback');
+            let previousActive = null;
+
+            function showModal(){
+                previousActive = document.activeElement;
+                modal.setAttribute('aria-hidden', 'false');
+                modal.classList.add('show');
+                emailInput.focus();
+                document.addEventListener('keydown', onKeyDown);
+            }
+
+            function hideModal(){
+                modal.setAttribute('aria-hidden', 'true');
+                modal.classList.remove('show');
+                feedback.textContent = '';
+                form.reset();
+                if(previousActive) previousActive.focus();
+                document.removeEventListener('keydown', onKeyDown);
+            }
+
+            function onKeyDown(e){
+                if(e.key === 'Escape') hideModal();
+            }
+
+            openBtn.addEventListener('click', showModal);
+            closeEls.forEach(el => el.addEventListener('click', hideModal));
+            overlay.addEventListener('click', hideModal);
+
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                const email = emailInput.value.trim();
+                if(!email){
+                    feedback.textContent = 'Por favor introduce un correo válido.';
+                    emailInput.focus();
+                    return;
+                }
+                feedback.textContent = 'Gracias — comprueba tu correo para confirmar la suscripción.';
+                setTimeout(hideModal, 2200);
+            });
+        })();
+    </script>
+
+</body>
+</html>
