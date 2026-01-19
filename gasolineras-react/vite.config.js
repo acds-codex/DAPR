@@ -6,7 +6,7 @@ const API_BASE = process.env.VITE_FUEL_API_BASE || 'https://sedeaplicaciones.min
 
 export default defineConfig({
   plugins: [react()],
-  base: '/gasolineras-react/',
+  base: '/DAPR/',
   server: {
     port: 5173,
     proxy: {
